@@ -32,19 +32,14 @@ export default function App() {
 
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
-      isBot: true,
-      text: "Hello! I'm a chatbot. How can I help you today?",
-    },
-    {
       isBot: false,
-      text: "Hi! I'd like to learn more about your services.",
+      text: "Hello jinn",
     },
     {
       isBot: true,
-      text: "I'd be happy to tell you about our services. What specific area are you interested in?",
+      text: "Hi! Harsh , How can I help you today?",
     },
   ]);
-
 
   const [input, setInput] = useState('')
 
@@ -67,7 +62,6 @@ export default function App() {
         console.error("Error parsing messages from localStorage:", error);
       }
     }
-    
   }, [])
 
   const updateOption = (key: keyof CustomizationOptions, value: string) => {
@@ -96,13 +90,11 @@ export default function App() {
     setInput(""); 
   };
 
-
-
   return (
-    <div className="min-h-screen w-screen bg-[#3296D7] py-4 px-8">
-      <div className="flex justify-between items-center md:flex-row flex-col">
+    <div className="min-h-screen w-screen bg-[#3296D7] py-4 px-4 sm:px-8">
+      <div className="flex flex-col-reverse lg:flex-row justify-between items-start gap-8 w-full h-full">
         {/* Customization Panel */}
-        <div className="bg-gray-400/50 p-4 rounded-lg shadow md:max-h-[80%] w-full md:w-auto">
+        <div className="bg-gray-400/50 p-4 rounded-lg shadow w-full lg:w-1/2 xl:w-2/5">
           <h2 className="text-xl font-bold mb-4">Customize Chat Interface</h2>
           <div className="space-y-4">
             <div>
@@ -182,7 +174,7 @@ export default function App() {
             </div>
             <div className="space-y-2">
               <label className="block text-sm font-medium">Bot Colors</label>
-              <div className="flex space-x-2">
+              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                 <div className="flex-1">
                   <label htmlFor="botBubbleColor" className="block text-xs mb-1">Bubble</label>
                   <div className="flex items-center space-x-2">
@@ -225,7 +217,7 @@ export default function App() {
             </div>
             <div className="space-y-2">
               <label className="block text-sm font-medium">User Colors</label>
-              <div className="flex space-x-2">
+              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                 <div className="flex-1">
                   <label htmlFor="userBubbleColor" className="block text-xs mb-1">Bubble</label>
                   <div className="flex items-center space-x-2">
@@ -286,7 +278,7 @@ export default function App() {
 
         {/* Chat Preview */}
         <div 
-          className="bg-white rounded-lg shadow overflow-hidden w-[30%]"
+          className="bg-white rounded-lg shadow overflow-hidden lg:w-[30%] w-auto mx-auto md:mx-0"
           style={{
             borderColor: options.borderColor,
             borderWidth: '1px',
@@ -297,16 +289,16 @@ export default function App() {
         >
           {/* Chat Header */}
           <div
-            className="px-4 py-0 flex justify-between items-center h-[5%]"
+            className="px-4 py-2 flex justify-between items-center"
             style={{ backgroundColor: options.headerBgColor }}
           >
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-white rounded-full p-0">
                 <img src="/chat-bot.png" alt="chat-bot" className='w-full h-full bg-transparent ' />
               </div>
-             <div className='flex flex-col justify-center items-center'>
-              <p className={`text-sm font-semibold`}>Jinn Live</p>
-              <span className='text-sm text-gray-400'>Demo Bot</span>
+             <div className='flex flex-col justify-center'>
+              <p className={`text-sm font-semibold text-white`}>Jinn Live</p>
+              <span className='text-xs text-gray-400'>Demo Bot</span>
              </div>
             </div>
             <button className="text-white !bg-transparent !outline-none !border-none text-2xl font-bold">&times;</button>
@@ -324,7 +316,7 @@ export default function App() {
                     <img src="/chat-bot.png" alt="chat-bot" className='w-full h-full bg-transparent ' />
                   </div>}
                   <div
-                  className={`px-4 py-2 rounded-xl ${message.isBot ? "rounded-tl-none":"rounded-br-none"}`} 
+                  className={`px-4 py-2 !rounded-xl ${message.isBot ? "!rounded-tl-none" : "!rounded-br-none"}`} 
                   style={{
                     backgroundColor: message.isBot ? options.botBubbleColor : options.userBubbleColor,
                     color: message.isBot ? options.botTextColor : options.userTextColor,
@@ -334,20 +326,20 @@ export default function App() {
                    {message.text}
                   </div>
                 </div>
-               
               </div>
             ))}
           </div>
 
           {/* Chat Input */}
-          <div className="p-4 border-t py-0 shadow-md" style={{ borderColor: options.borderColor }}>
+          <div className="p-4 border-t shadow-md" style={{ borderColor: options.borderColor }}>
             <div className="flex gap-2">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Type a message..."
-                className="flex-1 p-2 !border-none !outline-none text-black font-medium bg-white rounded"
+                className="flex-1 p-2 !border-none !outline-none text-black font
+-medium bg-white rounded"
                 style={{ borderColor: options.borderColor, borderRadius: options.borderRadius }}
               />
               <button
